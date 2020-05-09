@@ -1,0 +1,82 @@
+<aura:component controller = "BuscarCorreoController" implements="flexipage:availableForAllPageTypes"  access="global" >
+    <aura:attribute name="Contactos" type="list"/>
+    <aura:attribute name="Errores" type="String"/>
+     <aura:if isTrue="{!v.Errores}">
+         <lightning:layout  class="slds-page-header slds-page-header--object-home">
+        <lightning:layoutItem  padding="slds-p-horizontal_xx-large">
+            <lightning:icon iconName="standard:announcement" />
+        </lightning:layoutItem>
+        <lightning:layoutItem  padding="horizontal-small">
+            <div class="page-section page-header .slds-size_1-of-3">
+                <h1 class="slds-text-heading--label">No se ha encontrado ningun Contacto,vuelva a intentarlo</h1>
+            	<br></br>
+                <div onclick="{!c.refreshView}" data-value="">        
+		<lightning:button label="Aceptar" iconName="utility:add" iconPosition="center"  variant="brand" value=""/>
+         </div>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+           
+    </aura:if>
+    <aura:handler value="{!this}" action="{!c.doinit}"   event="c:Evento_Buscar_Correo"/>
+    <aura:if isTrue="{!not(empty(v.Contactos)) }">
+
+	<table class="slds-table slds-table_cell-buffer slds-table_bordered">
+  <thead>
+    <tr class="slds-line-height_reset">
+        <th class="slds-text-title_caps" scope="col">
+        <div class="slds-truncate" title="Nombre">Nombre</div>
+      </th>
+      <th class="slds-text-title_caps" scope="col">
+        <div class="slds-truncate" title="Apellido_1">Apellido 1</div>
+      </th>
+      <th class="slds-text-title_caps" scope="col">
+        <div class="slds-truncate" title="Apellido_1">Apellido 2 </div>
+      </th>
+      <th class="slds-text-title_caps" scope="col">
+        <div class="slds-truncate" title="Movil">Movil</div>
+      </th>
+      
+      <th class="slds-text-title_caps" scope="col">
+        <div class="slds-truncate" title="Telefono">Telefono</div>
+      </th>
+      <th class="slds-text-title_caps" scope="col">
+        <div class="slds-truncate" title="Correo">Correo</div>
+      </th>
+      <th class="slds-text-title_caps" scope="col">
+        <div class="slds-truncate" title="Cliente">Cliente</div>
+      </th>
+      <th class="slds-text-title_caps" scope="col">
+        <div class="slds-truncate" title="Comentario">Comentario</div>
+      </th>
+               
+    </tr>
+  </thead>
+  <tbody>
+       <aura:iteration items="{!v.Contactos}" var ="x">
+       			<tr>
+               		
+                   
+                    <td><div  label="{!x.Nombre}" class="slds-truncate" id="ad" title="Nombre">{!x.Nombre}</div></td>
+
+                    <td><div class="slds-truncate" title="Apellido_1">{!x.Apellido_1}</div></td>
+                    <td><div class="slds-truncate" title="Apellido_2">{!x.Apellido_2}</div></td>
+                    <td><div class="slds-truncate" title="Movil">{!x.Movil}</div></td>
+                    <td><div class="slds-truncate" title="Telefono">{!x.Telefono}</div></td>
+                    <td><div class="slds-truncate" title="Correo">{!x.Correo}</div></td>
+                    <td><div class="slds-truncate" title="Cliente">{!x.Cliente}</div></td>
+                    <td><div class="slds-truncate" title="Comentario">{!x.Comentario}</div></td>
+                    <td>
+                      <div onclick="{!c.anadircliente}" data-value="{!x.columna}">
+              <lightning:button label="Añadir" iconName="utility:add" iconPosition="center"  variant="brand" value=""/>
+            </div>
+                      </td>
+                </tr>
+      
+      </aura:iteration>
+         
+  </tbody>
+</table>
+        </aura:if>
+    
+</aura:component>

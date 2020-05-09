@@ -1,0 +1,45 @@
+<aura:component implements="flexipage:availableForAllPageTypes"  access="global">
+   
+    <lightning:navigation aura:id="nav" />
+    <aura:attribute name="Contacto" type="String" />
+    <aura:registerEvent name="appEvent" type="c:Evento_Buscar_Correo"/>
+    <lightning:layout  class="slds-page-header slds-page-header--object-home slds-size_1-of-3">
+        <lightning:layoutItem >
+            <lightning:icon iconName="standard:search" />
+        </lightning:layoutItem>
+        <lightning:layoutItem  padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading--label">Buscador Contactos</h1>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    <div aria-labelledby="newexpenseform">
+        
+        <fieldset class="slds-box slds-theme--default slds-container--small slds-size_1-of-3">
+        <legend id="newexpenseform" class="slds-text-heading--small slds-p-vertical--medium ">
+        </legend>
+  
+        
+        <form class="slds-form--stacked">                   
+            <lightning:input aura:id="Correo" label="Cliente"
+                             name="Correo"
+                             value="{!v.Contacto.Correo}"
+                             required="true"
+                             maxlength="20"
+                             minlength="0"
+                             /> 
+            
+            <lightning:button label="Buscar" 
+                              class="slds-m-top--medium"
+                              variant="brand"
+                              onclick="{!c.buscar}"/>
+        </form>
+      </fieldset>
+    </div>
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small" size="6">
+        
+        </lightning:layoutItem>
+    </lightning:layout>
+ 
+</aura:component>
